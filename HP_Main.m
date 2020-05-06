@@ -21,7 +21,7 @@ AEM = [8 6 0 7];
 %% filter design
 reporting && fprintf('\n> Poles & Zeros\n');
 
-[w, Q, n, Whp] = HP_Poles(amin, amax, wp, ws);
+[w, Q, n, whp] = HP_Poles(amin, amax, wp, ws);
 
 %% units
 reporting && fprintf('\n> Units\n');
@@ -48,7 +48,7 @@ tfn = cell(units,1);
 for k = 1:units
     tfn{k} = tf(num{k}, denum{k});
     if(plotting)
-        plot_transfer_function(tfn{k}, [ws/(2*pi) w0/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
+        plot_transfer_function(tfn{k}, [ws/(2*pi) whp/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
     end
     if(reporting)
        fprintf('>> Unit %i\n', k);
@@ -63,7 +63,7 @@ for k = 1:units
 end
 
 if(plotting)
-    plot_transfer_function(totalTf, [ws/(2*pi) w0/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
+    plot_transfer_function(totalTf, [ws/(2*pi) whp/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
 end
 if(reporting)
     fprintf('\n>> Total Transfer Function with no Gain Adjustment\n');
@@ -81,7 +81,7 @@ totalGain = HP_Gain(gain, specsGain);
 
 zeroGainTf = series(totalTf, totalGain);
 if(plotting)
-    plot_transfer_function(zeroGainTf, [ws/(2*pi) w0/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
+    plot_transfer_function(zeroGainTf, [ws/(2*pi) whp/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
 end
 if(reporting)
     fprintf('>>> Transfer Function\n');
@@ -90,7 +90,7 @@ end
 
 inverseZeroGainTf = inv(zeroGainTf);
 if(plotting)
-    plot_transfer_function(inverseZeroGainTf, [ws/(2*pi) w0/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
+    plot_transfer_function(inverseZeroGainTf, [ws/(2*pi) whp/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
 end
 if(reporting)
     fprintf('\n>>> Inverse Transfer Function\n');
@@ -105,7 +105,7 @@ totalSpecsGain = HP_Gain(gain, specsGain, R);
 
 totalSpecsGainTf = series(totalTf, totalSpecsGain);
 if(plotting)
-    plot_transfer_function(totalSpecsGainTf, [ws/(2*pi) w0/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
+    plot_transfer_function(totalSpecsGainTf, [ws/(2*pi) whp/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
 end
 if(reporting)
     fprintf('>>> Total Transfer Function for Gain %i db\n', specsGain);
@@ -114,7 +114,7 @@ end
 
 attenuation = inv(totalSpecsGainTf);
 if(plotting)
-    plot_transfer_function(attenuation, [ws/(2*pi) w0/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
+    plot_transfer_function(attenuation, [ws/(2*pi) whp/(2*pi) wp/(2*pi) 2*(wp/(2*pi))]);
 end
 if(reporting)
     fprintf('\n>>> Total Inverse Transfer Function for Gain %i db\n', specsGain);

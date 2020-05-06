@@ -1,4 +1,4 @@
-function [w, Q, n, w0] = HP_Poles(amin, amax, wp, ws)
+function [w, Q, n, whp] = HP_Poles(amin, amax, wp, ws)
 
 global reporting;
 
@@ -22,30 +22,24 @@ if(reporting)
     fprintf('(with ceil)   n = %i\n', n);
 end
 
-%% Parameters e & w0
+%% Parameter e
 e = 1 / (sqrt(10^(amax/10)-1));
 
-%%% low pass frequency
-W0 = Wp/((10^(amax/10)-1)^(1/(2*n)));
-
-%%% high pass w0
-w0 = wp/W0;
-
 if(reporting)
-    fprintf('\n>> Parameters e & a\n');
+    fprintf('\n>> Parameter e\n');
     fprintf('e = %f\n', e);
-    fprintf('w0 = %f\n', w0);
 end
 
 %% Half Power Frequency
-Whp = 1 / cosh((1/n) * (acosh(1/e)));
+%%% low pass frequency
+Whp = Wp/((10^(amax/10)-1)^(1/(2*n)));
 
-%%% FIXME: high pass whp (?)
-% whp = wp / Whp;
+%%% high pass w0
+whp = wp/Whp;
 
 if(reporting)
     fprintf('\n>> Half Power Frequency\n');
-    fprintf('ωhp = %f\n',Whp);
+    fprintf('ωhp = %f\n', whp);
 end
 
 %% Butterworth Angles
@@ -85,10 +79,10 @@ end
 
 %%% Convert p(k) to high pass
 for k = 1:kappa
-    sigma(k) = w0 * sigma(k);
-    omega(k) = w0 * omega(k);
+    sigma(k) = whp * sigma(k);
+    omega(k) = whp * omega(k);
     
-    w(k) = w0;
+    w(k) = whp;
 end
 
 if(reporting)
