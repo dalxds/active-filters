@@ -1,4 +1,4 @@
-function [w, Q, n] = LP_Poles(amin, amax, wp, ws)
+function [w, Q, n, whp] = LP_Poles(amin, amax, wp, ws)
 
 global reporting;
 
@@ -33,11 +33,11 @@ if(reporting)
 end
 
 %% Half Power Frequency
-Whp = cosh((1/n) * (acosh(1/e)));
+whp = cosh((1/n) * (acosh(1/e)));
 
 if(reporting)
     fprintf('\n>> Half Power Frequency\n');
-    fprintf('ωhp = %f\n',Whp);
+    fprintf('ωhp = %f\n',whp);
 end
 
 %% Butterworth Angles

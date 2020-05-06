@@ -21,7 +21,7 @@ AEM = [8 6 0 7];
 %% filter design
 reporting && fprintf('\n> Poles & Zeros\n');
 
-[w, Q, n] = LP_Poles(amin, amax, wp, ws);
+[w, Q, n, whp] = LP_Poles(amin, amax, wp, ws);
 
 %% units
 reporting && fprintf('\n> Units\n');
