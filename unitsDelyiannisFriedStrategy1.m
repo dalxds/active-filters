@@ -39,7 +39,7 @@ R2 = R2*km;
 C1 = C1*(1/(km*kf));
 C2 = C2*(1/(km*kf));
 
-if(reporting)    
+if(reporting)
     fprintf('-Real Elements\n');
     fprintf('C1 = %f μF\n', C1*10^6);
     fprintf('C2 = %f μF\n', C2*10^6);
@@ -48,7 +48,7 @@ if(reporting)
 end
 
 %% Transfer function
-numerator = [0 -2*Q 0];
-denumerator = [1 (1/Q) 1];
+numerator = [0 -2*w0*Q 0];
+denumerator = [1 (w0/Q) w0^2];
 
 end
