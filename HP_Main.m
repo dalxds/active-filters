@@ -101,7 +101,7 @@ end
 reporting && fprintf('\n>> Specifications Gain\n');
 
 specsGain = 10;
-totalSpecsGain = HP_Gain(gain, specsGain, R);
+totalSpecsGain = HP_Gain(gain, specsGain);
 
 totalSpecsGainTf = series(totalTf, totalSpecsGain);
 if(plotting)
