@@ -124,4 +124,4 @@ end
 %% fourier
 reporting && fprintf('\n> Fourier\n');
 
-HP_Fourier(attenuation);
+HP_Fourier(ws, wp, attenuation);
