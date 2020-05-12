@@ -24,7 +24,7 @@ if(plotting)
     ylabel('Voltage (V)');
 end
     
-Z = lsim(ChebyshevLowPass,X, t);
+Z = lsim(ChebyshevLowPass, X, t);
 W = fft(Z);
 OnlySources = abs(W/L);
 OutputFourierLowPass = OnlySources(1:L/2+1);

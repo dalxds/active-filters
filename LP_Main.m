@@ -125,4 +125,4 @@ end
 %% fourier
 reporting && fprintf('\n> Fourier\n');
 
-LP_Fourier(attenuation);
+LP_Fourier(totalSpecsGainTf);
