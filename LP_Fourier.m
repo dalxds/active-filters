@@ -8,7 +8,7 @@ L = 22000;            % Length of signal
 t = (0:L-1)*T;        % Time vector
 f = 2000;
 
-X = 0.5*square(2*pi*t*f,40);
+X = sawtooth(2*pi*t*f);
 Y = fft(X);
 OnlySources = abs(Y/L);
 InputFourierLowPass = OnlySources(1:L/2+1);

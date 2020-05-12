@@ -49,7 +49,7 @@ tfn = cell(units,1);
 for k = 1:units
     tfn{k} = tf(num{k}, denum{k});
     if(plotting)
-        plot_transfer_function(tfn{k}, [0 wp/(2*pi) ws/(2*pi)]);
+        plot_transfer_function(tfn{k}, [wp/(2*pi) ws/(2*pi)]);
     end
     if(reporting)
        fprintf('>> Unit %i\n', k);
@@ -64,7 +64,7 @@ for k = 1:units
 end
 
 if(plotting)
-    plot_transfer_function(totalTf, [0 0.925*wp/(2*pi) wp/(2*pi) whp/(2*pi) ws/(2*pi)]);
+    plot_transfer_function(totalTf, [wp/(2*pi) ws/(2*pi)]);
 end
 if(reporting)
     fprintf('\n>> Total Transfer Function with no Gain Adjustment\n');
@@ -82,7 +82,7 @@ totalGain = LP_Gain(gain, specsGain, R);
 
 zeroGainTf = series(totalTf, totalGain);
 if(plotting)
-    plot_transfer_function(zeroGainTf, [0 0.925*wp/(2*pi) wp/(2*pi) whp/(2*pi) ws/(2*pi)]);
+    plot_transfer_function(zeroGainTf, [wp/(2*pi) ws/(2*pi)]);
 end
 if(reporting)
     fprintf('>>> Transfer Function\n');
@@ -91,7 +91,7 @@ end
 
 inverseZeroGainTf = inv(zeroGainTf);
 if(plotting)
-    plot_transfer_function(inverseZeroGainTf, [0 0.925*wp/(2*pi) wp/(2*pi) whp/(2*pi) ws/(2*pi)]);
+    plot_transfer_function(inverseZeroGainTf, [wp/(2*pi) ws/(2*pi)]);
 end
 if(reporting)
     fprintf('\n>>> Inverse Transfer Function\n');
@@ -106,7 +106,7 @@ totalSpecsGain = LP_Gain(gain, specsGain, R);
 
 totalSpecsGainTf = series(totalTf, totalSpecsGain);
 if(plotting)
-    plot_transfer_function(totalSpecsGainTf, [0 0.925*wp/(2*pi) wp/(2*pi) whp/(2*pi) ws/(2*pi)]);
+    plot_transfer_function(totalSpecsGainTf, [wp/(2*pi) ws/(2*pi)]);
 end
 if(reporting)
     fprintf('>>> Total Transfer Function for Gain %i db\n', specsGain);
@@ -115,7 +115,7 @@ end
 
 attenuation = inv(totalSpecsGainTf);
 if(plotting)
-    plot_transfer_function(attenuation, [0 0.925*wp/(2*pi) wp/(2*pi) whp/(2*pi) ws/(2*pi)]);
+    plot_transfer_function(attenuation, [wp/(2*pi) ws/(2*pi)]);
 end
 if(reporting)
     fprintf('\n>>> Total Inverse Transfer Function for Gain %i db\n', specsGain);

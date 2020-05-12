@@ -37,7 +37,7 @@ if(plotting)
     ylabel('Voltage (V)');
 end
 
-Z = lsim(ButterworthHighPass,X, t);
+Z = lsim(ButterworthHighPass, X, t);
 W = fft(Z);
 OnlySources = abs(W/L);
 OutputFourierHighPass = OnlySources(1:L/2+1);
