@@ -7,7 +7,13 @@ T = 1/Fs;             % Sampling period
 L = 10000;            % Length of signal
 t = (0:L-1)*T;        % Time vector
 
-X = 0.5*cos((w0 - ((w0 - w3)/2))*t) + 0.8*cos((w0 + ((w0 + w3)/3))*t) + 0.8*cos((0.4 * w1)*t) + 0.6*cos((2.5 * w2)*t) + 1.2*cos((3*w2)*t);
+w(1) = w0-((w0-w3)/3);
+w(2) = w0+((w0+w3)/4);
+w(3) = 0.5*w1;
+w(4) = 2.4*w2;
+w(5) = 3.5*w2;
+
+X = cos(w(1)*t) + 0.6*cos(w(2)*t) + 0.7*cos(w(3)*t) + 0.8*cos(w(4)*t) + 0.6*cos(w(5)*t);
 Y = fft(X);
 OnlySources = abs(Y/L);
 InputFourierBandElimination = OnlySources(1:L/2+1);
