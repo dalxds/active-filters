@@ -35,7 +35,7 @@ gain    =   zeros(units,1);
 %%% calculate transfer functions
 for k = 1:units
     reporting && fprintf('\n>> Unit %i\n', k);
-    [num{k}, denum{k}, gain(k)] = unitsSallenKeyStrategy2(w(k), Q(k), specsC);
+    [num{k}, denum{k}, gain(k)] = unitsSallenKeyStrategy2HP(w(k), Q(k), specsC);
 end
 
 %% transfer function

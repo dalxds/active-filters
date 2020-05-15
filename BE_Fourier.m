@@ -25,7 +25,10 @@ a(4) = 0.8;
 a(5) = 0.6;
 
 %%% signal
-X = sum(a.*cos(w*t));
+X = 0;
+for i = 1:length(a)
+   X = X + a(i)*cos(w(i)*t));
+end
 Y = fft(X);
 OnlySources = abs(Y/L);
 InputFourierBandElimination = OnlySources(1:L/2+1);
@@ -39,7 +42,7 @@ if(reporting)
     fprintf('L = %f\n', L);
     fprintf('>>> Frequencies & Amplitudes\n');
     for i = 1:length(a)
-        fprintf('a%i = %f - w%i = %f', i, a(i), w(i));
+        fprintf('a%i = %f - w%i = %f\n', i, a(i), i, w(i));
     end
 end
 

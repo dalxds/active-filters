@@ -1,4 +1,4 @@
-function [numerator, denumerator, gain] = unitsSallenKeyStrategy2(w0, Q, specsC)
+function [numerator, denumerator, gain] = unitsSallenKeyStrategy2HP(w0, Q, specsC)
 
 global reporting;
 
