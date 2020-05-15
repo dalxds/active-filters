@@ -1,25 +1,47 @@
 function BE_Fourier(w0, w1, w2, w3, tf)
 
+global reporting;
 global plotting;
 
+%% fourier parameters
 Fs = 20000;           % Sampling frequency                    
 T = 1/Fs;             % Sampling period       
 L = 10000;            % Length of signal
 t = (0:L-1)*T;        % Time vector
 
-w(1) = w0-((w0-w3)/3);
-w(2) = w0+((w0+w3)/4);
+%% fourier input
+%%% frequencies
+w(1) = w0 - ((w0 - w3)/3);
+w(2) = w0 + ((w0 + w3)/4);
 w(3) = 0.5*w1;
 w(4) = 2.4*w2;
 w(5) = 3*w2;
 
-X = cos(w(1)*t) + 0.6*cos(w(2)*t) + 0.7*cos(w(3)*t) + 0.8*cos(w(4)*t) + 0.6*cos(w(5)*t);
+%%% amplitudes
+a(1) = 1;
+a(2) = 0.6;
+a(3) = 0.7;
+a(4) = 0.8;
+a(5) = 0.6;
+
+%%% signal
+X = sum(a.*cos(w*t));
 Y = fft(X);
 OnlySources = abs(Y/L);
 InputFourierBandElimination = OnlySources(1:L/2+1);
 InputFourierBandElimination(2:end-1) = 2*InputFourierBandElimination(2:end-1);
 
 f = Fs*(0:(L/2))/L;
+
+if(reporting)
+    fprintf('Fs = %f\n', Fs);
+    fprintf('T = %f\n', T);
+    fprintf('L = %f\n', L);
+    fprintf('>>> Frequencies & Amplitudes\n');
+    for i = 1:length(a)
+        fprintf('a%i = %f - w%i = %f', i, a(i), w(i));
+    end
+end
 
 if (plotting)
     figure;
@@ -29,6 +51,7 @@ if (plotting)
     ylabel('Voltage (V)');
 end
 
+%% output fourier
 Z = lsim(tf, X, t);
 W = fft(Z);
 OnlySources = abs(W/L);

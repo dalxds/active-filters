@@ -3,28 +3,41 @@ function HP_Fourier(ws, wp, ButterworthHighPass)
 global reporting;
 global plotting;
 
+%% fourier parameters
 Fs = 50000;           % Sampling frequency                    
 T = 1/Fs;             % Sampling period       
 L = 23000;            % Length of signal
 t = (0:L-1)*T;        % Time vector
 
-%%% fourier frequncies
-f(1) = 0.5*ws;
-f(2) = 0.8*ws;
-f(3) = 1.2*wp;
-f(4) = 2.4*wp;
-f(5) = 3.5*wp;
+%% fourier input
+%%% frequencies
+w(1) = 0.5*ws;
+w(2) = 0.8*ws;
+w(3) = 1.2*wp;
+w(4) = 2.4*wp;
+w(5) = 3.5*wp;
 
-X = cos(f(1)*t) + 0.6*cos(f(2)*t) + cos(f(3)*t) + 0.8*cos(f(4)*t) + 0.4*cos(f(5)*t);
+%%% amplitudes
+a(1) = 1;
+a(2) = 0.6;
+a(3) = 1;
+a(4) = 0.8;
+a(5) = 0.4;
+
+%%% signal
+X = sum(a.*cos(w*t));
 Y = fft(X);
 OnlySources = abs(Y/L);
 InputFourierHighPass = OnlySources(1:L/2+1);
 InputFourierHighPass(2:end-1) = 2*InputFourierHighPass(2:end-1);
 
 if(reporting)
-    fprintf('>>> Frequencies\n');
-    for i = 1:length(f)
-        fprintf('f%i = %f Hz\n', i, f(i));
+    fprintf('Fs = %f\n', Fs);
+    fprintf('T = %f\n', T);
+    fprintf('L = %f\n', L);
+    fprintf('>>> Frequencies & Amplitudes\n');
+    for i = 1:length(a)
+        fprintf('a%i = %f - w%i = %f', i, a(i), w(i));
     end
 end
 

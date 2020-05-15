@@ -1,13 +1,16 @@
 function LP_Fourier(ChebyshevLowPass)
 
+global reporting;
 global plotting;
 
+%% fourier parameters
 Fs = 40000;           % Sampling frequency                    
 T = 1/Fs;             % Sampling period       
 L = 22000;            % Length of signal
 t = (0:L-1)*T;        % Time vector
 f = 2000;
 
+%% fourier input
 X = sawtooth(2*pi*t*f);
 Y = fft(X);
 OnlySources = abs(Y/L);
@@ -16,6 +19,13 @@ InputFourierLowPass(2:end-1) = 2*InputFourierLowPass(2:end-1);
 
 f = Fs*(0:(L/2))/L;
 
+if(reporting)
+    fprintf('Fs = %f\n', Fs);
+    fprintf('T = %f\n', T);
+    fprintf('L = %f\n', L);
+    fprintf('f = %f\n', f);
+end
+
 if(plotting)
     figure;
     plot(f,InputFourierLowPass); 
@@ -23,7 +33,8 @@ if(plotting)
     xlabel('f (Hz)');
     ylabel('Voltage (V)');
 end
-    
+
+%% fourier output
 Z = lsim(ChebyshevLowPass, X, t);
 W = fft(Z);
 OnlySources = abs(W/L);
