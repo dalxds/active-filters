@@ -27,7 +27,7 @@ a(5) = 0.6;
 %%% signal
 X = 0;
 for i = 1:length(a)
-   X = X + a(i)*cos(w(i)*t));
+   X = X + a(i)*cos(w(i)*t);
 end
 Y = fft(X);
 OnlySources = abs(Y/L);
