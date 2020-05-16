@@ -132,4 +132,4 @@ end
 %% fourier
 reporting && fprintf('\n> Fourier\n');
 
-BE_Fourier(w0, w1, w2, w3, totalSpecsGainTf);
+BP_Fourier(w0, w1, w2, w3, totalSpecsGainTf);
