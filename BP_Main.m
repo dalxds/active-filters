@@ -89,7 +89,7 @@ totalGain = BP_Gain(w, Q, wz, gain, specsGain, w0);
 
 zeroGainTf = series(totalTf, totalGain);
 if(plotting)
-    plot_transfer_function(zeroGainTf, [w3/(2*pi) w1/(2*pi) w0/(2*pi) w2/(2*pi) w4/(2*pi)]);
+    plot_transfer_function(zeroGainTf, [w1/(2*pi) w3/(2*pi) w0/(2*pi) w4/(2*pi) w2/(2*pi)]);
 end
 if(reporting)
     fprintf('>>> Transfer Function\n');
@@ -113,7 +113,7 @@ totalSpecsGain = BP_Gain(w, Q, wz, gain, specsGain, w0);
 
 totalSpecsGainTf = series(totalTf, totalSpecsGain);
 if(plotting)
-    plot_transfer_function(totalSpecsGainTf, [0 w1/(2*pi) w3/(2*pi) w0/(2*pi) w4/(2*pi) w2/(2*pi) (2*w2)/(2*pi)]);
+    plot_transfer_function(totalSpecsGainTf, [w1/(2*pi) w3/(2*pi) w0/(2*pi) w4/(2*pi) w2/(2*pi)]);
 end
 if(reporting)
     fprintf('>>> Total Transfer Function for Gain %i db\n', specsGain);
@@ -122,7 +122,7 @@ end
 
 attenuation = inv(totalSpecsGainTf);
 if(plotting)
-    plot_transfer_function(attenuation, [0 w1/(2*pi) w3/(2*pi) w0/(2*pi) w4/(2*pi) w2/(2*pi) (2*w2)/(2*pi)]);
+    plot_transfer_function(attenuation, [w1/(2*pi) w3/(2*pi) w0/(2*pi) w4/(2*pi) w2/(2*pi)]);
 end
 if(reporting)
     fprintf('\n>>> Total Inverse Transfer Function for Gain %i db\n', specsGain);
